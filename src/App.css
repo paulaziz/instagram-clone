@@ -3,12 +3,11 @@
 }
 .App {
   background-color: #fafafa;
-  height: 100vh;
 }
 
 .app__headerImage {
   background-color: white;
-  height: 29px;
+  height: px;
   width: 103px;
   padding: 20px;
   border-bottom: 1px solid lightgray;
