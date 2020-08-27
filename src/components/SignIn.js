@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
 const SignIn = () => {
   const classes = useStyles();
   const [modalStyle] = React.useState(getModalStyle);
+
   const [openSignIn, setOpenSignIn] = useState(false);
   const [email, setEmail] = useState([""]);
   const [password, setPassword] = useState([""]);

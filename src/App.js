@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import Post from "./components/Post";
-import SignIn from "./components/SignIn";
-import SignUp from "./components/SignUp";
-
 import { db, auth } from "./firebase";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import { Button, Input } from "@material-ui/core";
+import ImageUpload from "./components/ImageUpload";
 
 function getModalStyle() {
   const top = 50;
@@ -57,15 +55,17 @@ function App() {
 
   // useEffect runs a piece of code base on a specific condition
   useEffect(() => {
-    db.collection("posts").onSnapshot((snapshot) => {
-      // every time a new post is added, this code fires
-      setPosts(
-        snapshot.docs.map((doc) => ({
-          id: doc.id,
-          post: doc.data(),
-        }))
-      );
-    });
+    db.collection("posts")
+      // .orderBy("timestamp", "desc")
+      .onSnapshot((snapshot) => {
+        // every time a new post is added, this code fires
+        setPosts(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            post: doc.data(),
+          }))
+        );
+      });
     return () => {
       // perform some cleanup actions before you refire useEffect ..detaches listener
       unsubscribe();
@@ -98,10 +98,11 @@ function App() {
 
   return (
     <div className="App">
-      {/* Image Upload */}
-      {/* caption
-File Picker
-Post Button */}
+      {user?.displayName ? (
+        <ImageUpload username={user.displayName} />
+      ) : (
+        <h3>Sorry you need to login to upload</h3>
+      )}
 
       <Modal open={open} onClose={() => setOpen(false)}>
         <div style={modalStyle} className={classes.paper}>
@@ -137,8 +138,7 @@ Post Button */}
           </form>
         </div>
       </Modal>
-      {/* <SignUp />
-      <SignIn /> */}
+
       <Modal open={openSignIn} onClose={() => setOpenSignIn(false)}>
         <div style={modalStyle} className={classes.paper}>
           <form className="app__signin">
@@ -186,6 +186,7 @@ Post Button */}
       )}
 
       <h1>Let's build an Instagram Clone!</h1>
+
       {posts.map(({ id, post }) => (
         <Post
           key={id}
