@@ -5,9 +5,13 @@
   background-color: #fafafa;
 }
 
+.app__header {
+  display: flex;
+  /* flex-direction: row; */
+  justify-content: space-between;
+}
 .app__headerImage {
   background-color: white;
-  height: px;
   width: 103px;
   padding: 20px;
   border-bottom: 1px solid lightgray;
@@ -17,4 +21,15 @@
 .app__signup {
   display: flex;
   flex-direction: column;
+}
+
+.loginContainer {
+  /* padding-top: 20px; */
+  display: flex;
+  align-items: center;
+  padding-right: 20px;
+}
+
+.app__Posts {
+  padding: 20px;
 }

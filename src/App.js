@@ -56,7 +56,7 @@ function App() {
   // useEffect runs a piece of code base on a specific condition
   useEffect(() => {
     db.collection("posts")
-      // .orderBy("timestamp", "desc")
+      .orderBy("timestamp", "desc")
       .onSnapshot((snapshot) => {
         // every time a new post is added, this code fires
         setPosts(
@@ -98,12 +98,6 @@ function App() {
 
   return (
     <div className="App">
-      {user?.displayName ? (
-        <ImageUpload username={user.displayName} />
-      ) : (
-        <h3>Sorry you need to login to upload</h3>
-      )}
-
       <Modal open={open} onClose={() => setOpen(false)}>
         <div style={modalStyle} className={classes.paper}>
           <form className="app__signup">
@@ -175,26 +169,35 @@ function App() {
           src="https://i.pinimg.com/originals/f9/f0/7a/f9f07a203874e68dd521ff8f8b12d0b7.gif"
           alt="instgram header"
         />
-      </div>
-      {user ? (
-        <Button onClick={() => auth.signOut()}>Logout</Button>
-      ) : (
-        <div className="app_loginContainer">
-          <Button onClick={() => setOpen(true)}>Sign Up</Button>
-          <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
+        <div className="loginContainer">
+          {user ? (
+            <Button onClick={() => auth.signOut()}>Logout</Button>
+          ) : (
+            <div className="app_loginContainer">
+              <Button onClick={() => setOpen(true)}>Sign Up</Button>
+              <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
+            </div>
+          )}
         </div>
+      </div>
+
+      {/* <h1>Let's build an Instagram Clone!</h1> */}
+      <div className="app__Posts">
+        {posts.map(({ id, post }) => (
+          <Post
+            key={id}
+            username={post.username}
+            caption={post.caption}
+            imageUrl={post.imageUrl}
+          />
+        ))}
+      </div>
+
+      {user?.displayName ? (
+        <ImageUpload username={user.displayName} />
+      ) : (
+        <h3>Sorry you need to login to upload</h3>
       )}
-
-      <h1>Let's build an Instagram Clone!</h1>
-
-      {posts.map(({ id, post }) => (
-        <Post
-          key={id}
-          username={post.username}
-          caption={post.caption}
-          imageUrl={post.imageUrl}
-        />
-      ))}
     </div>
   );
 }
