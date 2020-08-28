@@ -32,4 +32,8 @@
 
 .app__Posts {
   padding: 20px;
+  display: flex;
+  justify-content: center;
 }
+/* .app__PostsLeft {
+} */
