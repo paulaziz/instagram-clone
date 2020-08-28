@@ -186,6 +186,8 @@ function App() {
         {posts.map(({ id, post }) => (
           <Post
             key={id}
+            postId={id}
+            user={user}
             username={post.username}
             caption={post.caption}
             imageUrl={post.imageUrl}
@@ -197,7 +199,11 @@ function App() {
         {user?.displayName ? (
           <ImageUpload username={user.displayName} />
         ) : (
-          <h3>Sorry you need to login to upload</h3>
+          <h3>
+            <span className="loggedOutMessage">
+              Sorry you need to login to upload
+            </span>
+          </h3>
         )}
       </div>
     </div>

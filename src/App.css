@@ -7,15 +7,19 @@
 
 .app__header {
   display: flex;
-  /* flex-direction: row; */
   justify-content: space-between;
-}
-.app__headerImage {
+  position: sticky;
+  top: 0;
+  z-index: 1;
   background-color: white;
-  width: 103px;
   padding: 20px;
   border-bottom: 1px solid lightgray;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.app__headerImage {
   object-fit: contain;
+  width: 103px;
 }
 
 .app__signup {
@@ -35,4 +39,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.loggedOutMessage {
+  padding-bottom: 50px;
+  display: flex;
+  justify-content: center;
 }
